@@ -1,24 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 20 22:29:05 2022
-
-@author: s
-"""
-
 from collections import defaultdict
-
-
 class Graph():
     def __init__(self):
         self.edges = defaultdict(list)
         self.weights = {}
-        
     def addEdge(self, fromVerex, toVertex, weight):
         self.edges[fromVerex].append(toVertex)
         self.edges[toVertex].append(fromVerex)
         self.weights[(fromVerex, toVertex)] = weight
-        self.weights[(toVertex, fromVerex)] = weight
-        
+        self.weights[(toVertex, fromVerex)] = weight     
 def dijkstra(myGraph, initial, end):
     shortestPaths = {initial: (None, 0)}
     currentVertex = initial
@@ -45,30 +34,55 @@ def dijkstra(myGraph, initial, end):
         nextVertex = shortestPaths[currentVertex][0]
         currentVertex = nextVertex
     path = path[: : -1]
-    return path
-
-
-
+    return path, nextDestinations[end][1]
 graph = Graph()
-edges = [
-    ('Orumiyeh', 'Kermanshah', 54),
-    ('Kermanshah', 'ShahrKord', 52),
-    ('Kermanshah', 'Ilam', 17),
-    ('Kermanshah', 'Yasooj', 78),
-    ('Ilam', 'Yasooj', 87),
-    ('Ilam', 'Ahvaz', 45),
-    ('Ahvaz', 'Boushehr', 45),
-    ('Boushehr', 'Yasooj', 29),
-    ('Boushehr', 'Mashhad', 160),
-    ('Yasooj', 'ShahrKord', 26),
-    ('Yasooj', 'Esfahan', 33),
-    ('ShahrKord', 'Esfahan', 10),
-    ('Esfahan', 'Gorgan', 82),
-    ('Esfahan', 'Mashhad', 110)
-]
-
+edges = []
+P = int(input())
+for i in range(P):
+    m, n, w = input().split()
+    edges.append((m,n,int(w)))
 
 for edge in edges:
     graph.addEdge(*edge)
-    
-dijkstra(graph, 'Boushehr', 'Gorgan')
+
+len_cow = {}
+for i in edges:
+    if i[0] == i[0].upper():
+        len_cow[i[0]] = (dijkstra(graph, i[0], 'Z'))[1]
+        
+
+[print(key, value) for key, value in len_cow.items() if value == min(len_cow.values())]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
