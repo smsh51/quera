@@ -41,48 +41,10 @@ P = int(input())
 for i in range(P):
     m, n, w = input().split()
     edges.append((m,n,int(w)))
-
 for edge in edges:
     graph.addEdge(*edge)
-
 len_cow = {}
 for i in edges:
     if i[0] == i[0].upper():
         len_cow[i[0]] = (dijkstra(graph, i[0], 'Z'))[1]
-        
-
 [print(key, value) for key, value in len_cow.items() if value == min(len_cow.values())]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
